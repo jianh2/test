@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -36,7 +37,7 @@ import com.badlogic.gdx.utils.Array;
  * See: http://blog.xoppa.com/loading-a-scene-with-libgdx/
  * @author Xoppa
  */
-public class LoadSceneTest implements ApplicationListener {
+public class LoadSceneTest implements AnimationController.AnimationListener, ApplicationListener {
     public PerspectiveCamera cam;
     public CameraInputController camController;
     public ModelBatch modelBatch;
@@ -49,6 +50,10 @@ public class LoadSceneTest implements ApplicationListener {
     public Array<ModelInstance> invaders = new Array<ModelInstance>();
     public ModelInstance ship;
     public ModelInstance space;
+
+
+    Model instance;
+    AnimationController controller;
 
     @Override
     public void create () {
@@ -71,8 +76,10 @@ public class LoadSceneTest implements ApplicationListener {
         assets.load("data/Bot.obj", Model.class);
         assets.load("data/block.obj", Model.class);
         assets.load("data/Paladin.obj", Model.class);
-//        assets.load("data/spacesphere.obj", Model.class);
+        assets.load("data/spacesphere.obj", Model.class);
         loading = true;
+
+
     }
 
     private void doneLoading() {
@@ -136,5 +143,15 @@ public class LoadSceneTest implements ApplicationListener {
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void onEnd(AnimationController.AnimationDesc animation) {
+
+    }
+
+    @Override
+    public void onLoop(AnimationController.AnimationDesc animation) {
+
     }
 }
